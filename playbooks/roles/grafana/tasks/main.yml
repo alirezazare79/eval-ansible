@@ -1,0 +1,14 @@
+- name: Provision datasources
+  copy:
+    src: "{{ item }}"
+    dest: /etc/grafana/provisioning/datasources/
+  loop:
+    - prometheus-ds.yml
+    - loki-ds.yml
+  notify: restart grafana
+
+- name: Provision dashboard logs
+  copy:
+    src: dashboard-logs.json
+    dest: /var/lib/grafana/dashboards/
+  notify: restart grafana

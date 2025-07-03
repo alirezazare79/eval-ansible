@@ -1,0 +1,9 @@
+---
+- name: Déploiement stack monitoring
+  hosts: all
+  become: true
+  roles:
+    - prometheus
+    - loki
+    - promtail
+    - grafana

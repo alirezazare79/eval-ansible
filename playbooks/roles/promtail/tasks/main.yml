@@ -1,0 +1,12 @@
+- name: Télécharger Promtail
+  unarchive:
+    src: "https://github.com/grafana/loki/releases/download/v{{ promtail_version }}/promtail-linux-amd64.zip"
+    dest: /usr/local/bin
+    remote_src: yes
+    creates: /usr/local/bin/promtail
+
+- name: Déployer promtail-config.yml
+  template:
+    src: promtail-config.yml.j2
+    dest: /etc/promtail/promtail-config.yml
+  notify: restart promtail

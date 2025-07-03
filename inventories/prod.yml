@@ -1,0 +1,12 @@
+all:
+  hosts:
+    vm_monitoring:
+      ansible_connection: local      
+      ansible_user: "{{ lookup('env','USER') }}"    
+  vars:
+    prometheus_version: "2.50.1"
+    grafana_apt_repo: "https://packages.grafana.com/oss/deb"
+    loki_version: "2.9.3"
+    promtail_version: "2.9.3"
+
+    grafana_admin_password: "ChangeMe!"

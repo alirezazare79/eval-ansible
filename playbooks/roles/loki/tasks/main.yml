@@ -1,0 +1,22 @@
+- name: Installer unzip (nécessaire pour extraire l'archive .zip)
+  ansible.builtin.apt:
+    name: unzip
+    state: present
+    update_cache: yes
+
+
+- name: Télécharger Loki
+  unarchive:
+    src: "https://github.com/grafana/loki/releases/download/v{{ loki_version }}/loki-linux-amd64.zip"
+    dest: /usr/local/bin
+    remote_src: yes
+    creates: /usr/local/bin/loki
+  register: loki_archive
+
+- name: Déployer config loki-config.yml
+  copy:
+    src: loki-config.yml
+    dest: /etc/loki/loki-config.yml
+    owner: loki
+    group: loki
+  notify: restart loki

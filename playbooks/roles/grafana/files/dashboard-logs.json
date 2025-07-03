@@ -1,0 +1,18 @@
+{
+  "uid": "varlog",
+  "title": "Logs système (/var/log)",
+  "schemaVersion": 30,
+  "version": 1,
+  "refresh": "10s",
+  "panels": [
+    {
+      "type": "logs",
+      "title": "Logs récents",
+      "datasource": "Loki",
+      "targets": [
+        { "expr": "{job=\"varlog\"}" }
+      ],
+      "maxDataPoints": 1000
+    }
+  ]
+}
